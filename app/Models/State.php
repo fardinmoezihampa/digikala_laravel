@@ -13,7 +13,6 @@ class State extends Model
 
     public function submit($formData, $stateId)
     {
-
         State::query()->updateOrCreate(
             [
                 'id' => $stateId,

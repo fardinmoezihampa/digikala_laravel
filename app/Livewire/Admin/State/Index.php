@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Livewire\Admin\State;
-
 use App\Models\Country;
 use App\Models\State;
 use Illuminate\Support\Facades\Validator;
