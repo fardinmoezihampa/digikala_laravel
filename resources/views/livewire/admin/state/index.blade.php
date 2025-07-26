@@ -1,8 +1,8 @@
 <div class="row">
     {{-- @dd($countries)--}}
     {{---form---}}
-   @include('livewire.admin.country.form')
+    @include('livewire.admin.state.form')
     {{---list---}}
-   @include('livewire.admin.country.table')
+    @include('livewire.admin.state.table')
 
 </div>

@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Livewire\Admin\State;
+
+use App\Models\Country;
+use App\Models\State;
+use Illuminate\Support\Facades\Validator;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class Index extends Component
+{
+    use WithPagination;
+
+    public $countries = [];
+    public $name;
+    public $stateId;
+    public $countryId;
+
+    public function mount()
+    {
+        $this->countries = Country::all();
+    }
+
+    public function submit($formData, State $state)
+    {
+        $validator = Validator::make($formData, [
+            'name' => 'required|string|max:30',
+            'countryId' => 'required|exists:countries,id',
+        ],
+            [
+                '*.required' => 'فیلد ضروری است',
+                '*.string' => 'فرمت اشتباه است!',
+                '*.max' => 'حداکثر تعداد کارکتر :30',
+                'countryId.exists' => 'کشور نام معتبر است!',
+            ]);
+        $validator->validate();
+        $this->resetValidation();
+        $state->submit($formData, $this->stateId);
+        $this->reset();
+        $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
+
+    }
+
+    public function edit($state_id)
+    {
+        $state = State::query()->where('id', $state_id)->first();
+        if ($state) {
+            $this->name = $state->name;
+            $this->stateId = $state->id;
+            $this->countryId=$state->country_id;
+        }
+    }
+
+    public function delete($state_id)
+    {
+        State::query()->where('id', $state_id)->delete();
+        $this->dispatch('success', 'عملیات حذف با موفقیت انجام شد!');
+    }
+
+    public function render()
+    {
+        $states = State::query()->with('country')->paginate(10);
+        return view('livewire.admin.state.index',
+            compact('states'))
+            ->layout('layouts.admin.app');
+    }
+}

@@ -5,11 +5,14 @@ namespace App\Livewire\Admin\Country;
 use App\Models\Country;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
 
+    use WithPagination;
     public $name;
+    public $countryId;
 
     public function submit($formData, Country $country)
     {
@@ -22,14 +25,31 @@ class Index extends Component
                 '*.max' => 'حداکثر تعداد کارکترها:30'
             ]);
         $validator->validate();
-        $country->submit($formData);
+        $this->resetValidation();
+        $country->submit($formData, $this->countryId);
         $this->reset();
-        $this->dispatch('success','عملیات افزودن با موفقیت انجام شد!');
+        $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
+    }
+
+    public function edit($country_id)
+    {
+        //dd($country_id);
+        $country = Country::query()->where('id', $country_id)->first();
+        if ($country) {
+            $this->name = $country->name;
+            $this->countryId = $country->id;
+        }
+    }
+
+    public function delete($country_id)
+    {
+        Country::query()->where('id', $country_id)->delete();
+        $this->dispatch('success', 'عملیات حذف با موفقیت انجام شد!');
     }
 
     public function render()
     {
-        $countries = Country::all();
+        $countries = Country::query()->paginate(10);
         return view('livewire.admin.country.index', [
             'countries' => $countries,
         ])->layout('layouts.admin.app');

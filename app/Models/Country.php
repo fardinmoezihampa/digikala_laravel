@@ -12,10 +12,14 @@ class Country extends Model
     //protected $fillable = ['name'];
     protected $guarded = [];
 
-    public function submit($formData)
+    public function submit($formData, $countryId)
     {
-        Country::query()->create([
-            'name' => $formData['name']
-        ]);
+        Country::query()->updateOrCreate(
+            [
+                'id' => $countryId,
+            ],
+            [
+                'name' => $formData['name']
+            ]);
     }
 }
