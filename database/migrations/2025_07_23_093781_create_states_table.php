@@ -13,6 +13,10 @@ return new class extends Migration {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
+            /*$table->unsignedBigInteger('country_id');
+            $table->foreignId('country_id')->references('id')->on('countries');*/
+
             $table->foreignId('country_id')->constrained();
             $table->timestamps();
         });

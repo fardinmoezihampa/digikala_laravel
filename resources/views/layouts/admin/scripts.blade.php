@@ -13,13 +13,22 @@
 <script src="/admin/src/plugins/src/sweetalerts2/custom-sweetalert.js"></script>
 
 <script>
-    window.addEventListener('success', function(event) {
+    window.addEventListener('success', function (event) {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title:event.detail,
+            title: event.detail,
             showConfirmButton: false,
             timer: 1500
+        })
+    })
+    window.addEventListener('error', function (event) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: event.detail,
+            showConfirmButton: false,
+            timer: 3000
         })
     })
 </script>
