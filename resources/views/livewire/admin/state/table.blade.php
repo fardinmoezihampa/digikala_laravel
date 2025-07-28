@@ -15,7 +15,7 @@
                         <th scope="col">#</th>
                         <th scope="col">اسم استان</th>
                         <th scope="col">اسم کشور</th>
-                        <th class="text-center" scope="col"></th>
+                        <th class="text-center" scope="col">عملیات</th>
                     </tr>
                     </thead>
                     <tbody>

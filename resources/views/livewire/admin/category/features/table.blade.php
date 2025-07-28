@@ -3,7 +3,9 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4>لیست دسته بندی ها</h4>
+                    <h4>
+                      لیست ویژگی ها
+                    </h4>
                 </div>
             </div>
         </div>
@@ -13,35 +15,31 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">نام دسته بندی</th>
-                        <th scope="col">دسته بندی والد</th>
-                        <th scope="col">ویژگی ها</th>
+                        <th scope="col">اسم ویژگی</th>
+                        <th class="text-center" scope="col">مقادیر</th>
                         <th class="text-center" scope="col">عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($allCategories as $category)
+                    @foreach($categoryFeatures as $feature)
                         <tr>
                             <td>
-                                {{$loop->iteration + $allCategories->firstItem() - 1}}
+                                {{$loop->iteration + $categoryFeatures->firstItem() - 1}}
                             </td>
                             <td>
                                 <div class="media">
                                     <div class="media-body align-self-center">
-                                        <h6 class="mb-0">{{$category->name}}</h6>
+                                        <h6 class="mb-0">{{$feature->name}}</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                {{@$category->parent->name}}
-                            </td>
-                            <td>
-                                <a href="{{route('admin.category.features',$category->id)}}"
-                                   class="btn btn-outline-info">ویژگی</a>
+                            <td class="text-center">
+                                <a href="{{route('admin.category.features',$feature->id)}}"
+                                   class="btn btn-outline-info">مقادیر</a>
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="javascript:void(0);" wire:click="edit({{$category->id}})"
+                                    <a href="javascript:void(0);" wire:click="edit({{$feature->id}})"
                                        class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" title=""
                                        data-bs-original-title="ویرایش">
@@ -54,7 +52,7 @@
                                         </svg>
                                     </a>
                                     <a href="javascript:void(0);" wire:confirm="آیا از حذف مطمئنید؟"
-                                       wire:click="delete({{$category->id}})"
+                                       wire:click="delete({{$feature->id}})"
                                        class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" title=""
                                        data-bs-original-title="حذف">
@@ -76,7 +74,7 @@
 
                     </tbody>
                 </table>
-                {{$allCategories->links('layouts.admin.pagination')}}
+                {{$categoryFeatures->links('layouts.admin.pagination')}}
             </div>
         </div>
     </div>
