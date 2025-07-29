@@ -17,7 +17,7 @@ class Features extends Component
     public $featureId;
     public $name;
 
-    public function mount(category $category)
+    public function mount(Category $category)
     {
         //dd($category);
         $this->categoryName = $category->name;
@@ -39,7 +39,7 @@ class Features extends Component
         $validator->validate();
         $this->resetValidation();
         $categoryFeature->submit($FormData, $this->categoryId, $this->featureId);
-        $this->reset();
+        $this->reset('name');
         $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
     }
 
@@ -68,7 +68,11 @@ class Features extends Component
 
     public function render()
     {
-        $categoryFeatures = CategoryFeature::query()->paginate(10);
+        //dd($this->categoryId);
+
+        $categoryFeatures = CategoryFeature::query()
+            ->where('category_id', $this->categoryId)
+            ->paginate(10);
         return view('livewire.admin.category.features.index', [
             'categoryFeatures' => $categoryFeatures
         ])->layout('layouts.admin.app');;
