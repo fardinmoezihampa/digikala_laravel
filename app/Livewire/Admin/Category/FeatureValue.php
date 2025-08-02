@@ -40,18 +40,17 @@ class FeatureValue extends Component
         $this->resetValidation();
         $categoryFeatureValue->submit($FormData, $this->valueId, $this->featureId);
         $this->reset('value');
+        $this->reset('valueId');
         $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
     }
 
     public function edit($valueId)
     {
         $featureValue = CategoryFeatureValue::query()->where('id', $valueId)->first();
-
         if ($featureValue) {
             $this->value = $featureValue->value;
             $this->valueId = $featureValue->id;
             $this->featureId = $featureValue->category_feature_id;
-            //$this->featureId = $featureValue->featureId;
         }
     }
 

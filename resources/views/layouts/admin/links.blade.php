@@ -38,3 +38,8 @@
 <!--  BEGIN CUSTOM STYLE FILE  -->
 <link href="/admin/src/assets/css/light/elements/custom-pagination.css" rel="stylesheet" type="text/css" />
 <link href="/admin/src/assets/css/dark/elements/custom-pagination.css" rel="stylesheet" type="text/css" />
+
+<!--  BEGIN CUSTOM STYLE switches  -->
+<link rel="stylesheet" type="text/css" href="/admin/src/assets/css/light/forms/switches.css">
+<link rel="stylesheet" type="text/css" href="/admin/src/assets/css/dark/forms/switches.css">
+

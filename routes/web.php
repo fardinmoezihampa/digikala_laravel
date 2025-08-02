@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Dashboard\Index as dashboardIndex;
 use App\Livewire\Admin\Country\Index as countryIndex;
 use App\Livewire\Admin\State\Index as stateIndex;
@@ -8,7 +9,9 @@ use App\Livewire\Admin\Category\Index as categoryIndex;
 use App\Livewire\Admin\Category\Features;
 use App\Livewire\Admin\Category\FeatureValue;
 
-use Illuminate\Support\Facades\Route;
+//-----------------these is for Product Component---------------------------
+
+use App\Livewire\Admin\Product\Create;
 
 //Route::get('/', Index::class);
 
@@ -20,3 +23,6 @@ Route::get('/admin/category', categoryIndex::class)->name('admin.category.index'
 Route::get('/admin/category/{category}/features', Features::class)->name('admin.category.features');
 Route::get('/admin/category/features/{categoryFeature}/values', FeatureValue::class)->name('admin.category.feature.values');
 
+//....setting product ---------------------------------------------------------
+
+Route::get('/admin/product/create',Create::class)->name('admin.product.create');

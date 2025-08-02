@@ -40,6 +40,7 @@ class Features extends Component
         $this->resetValidation();
         $categoryFeature->submit($FormData, $this->categoryId, $this->featureId);
         $this->reset('name');
+        $this->reset('featureId');
         $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
     }
 
