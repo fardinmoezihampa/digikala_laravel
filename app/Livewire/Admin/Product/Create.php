@@ -7,26 +7,35 @@ use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
+    public $photos = [];
+
     public $categories = [];
     public $sellers = [];
+
     public $name;
     public $slug;
+
     public $productId;
+
 
     public function mount()
     {
+
         $this->categories = Category::all();
         $this->sellers = Seller::query()->select('id', 'shop_name')->get();
-        //dd($this->sellers);
+
     }
 
     public function updatedName()
     {
-        //dd('test');
         $this->slug = Str::slug($this->name, '-', null);
     }
 
@@ -38,9 +47,12 @@ class Create extends Component
         } else {
             $formData['featured'] = false;
         }
-        //dd($formData);
+
+        $formData['photos'] = $this->photos;
+
 
         $validator = Validator::make($formData, [
+            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             'name' => 'required|string',
             'slug' => 'required|string',
             'meta_title' => 'nullable|string',
@@ -56,21 +68,20 @@ class Create extends Component
             '*.required' => 'فیلد ضروری است.',
             '*.string' => 'فرمت ورودی اشتباه است.',
             '*.integer' => 'این فیلد باید از نوع عددی باشد.',
-            '*.min' => 'حداقل تعداد کارکتر :50',
             '*.boolean' => 'افزدون به کالای ویژه را انتخاب کنید!',
             'categoryId.exists' => 'دسته بندی نامعتبر است.',
             'sellerId.exists' => 'فروشنده نامعتبر است.',
+            'photos.*.image' => 'فرمت نامعتبر است ...',
         ]);
         $validator->validate();
         $this->resetValidation();
-        $product->submit($formData, $this->productId);
+        $product->submit($formData, $this->productId, $this->photos);
         $this->reset();
         $this->dispatch('success', 'عملیات با موفقیت انجام شد!');
     }
 
     public function render()
     {
-
-        return view('livewire.admin.product.create')->layout('layouts.admin.app');
+        return view('livewire.admin.product.create.index')->layout('layouts.admin.app');
     }
 }
