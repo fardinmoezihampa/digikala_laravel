@@ -11,6 +11,7 @@ use App\Livewire\Admin\Category\FeatureValue;
 
 //-----------------these is for Product Component---------------------------
 
+use App\Livewire\Admin\Product\Index as productIndex;
 use App\Livewire\Admin\Product\Create;
 
 //Route::get('/', Index::class);
@@ -25,4 +26,5 @@ Route::get('/admin/category/features/{categoryFeature}/values', FeatureValue::cl
 
 //....setting product ---------------------------------------------------------
 
+Route::get('/admin/product/index',productIndex::class)->name('admin.product.index');
 Route::get('/admin/product/create',Create::class)->name('admin.product.create');
