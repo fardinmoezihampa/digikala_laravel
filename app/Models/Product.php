@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
@@ -120,14 +122,23 @@ class Product extends Model
     }
 
 
-     public function coverImage()
-     {
-         return $this->hasOne(ProductImage::class, 'product_id', 'id')
-             ->where('is_cover', true);
-     }
+    public function coverImage()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id', 'id')
+            ->where('is_cover', true);
+    }
 
     /*public function coverImage()
     {
         return $this->belongsTo(ProductImage::class, 'id', 'product_id')->where('is_cover', '=', true);
     }*/
+    public function removeProduct(Product $product)
+    {
+        DB::transaction(function () use ($product) {
+            $product->delete();
+            ProductImage::query()->where('product_id', $product->id)->delete();
+            SeoItem::query()->where('ref_id', $product->id)->delete();
+            File::deleteDirectory('products/' . $product->id);
+        });
+    }
 }

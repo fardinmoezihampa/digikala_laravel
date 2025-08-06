@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->bigInteger('price');
             $table->foreignId('order_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

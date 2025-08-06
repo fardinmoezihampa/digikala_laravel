@@ -3,7 +3,10 @@
 namespace App\Livewire\Admin\Product;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\SeoItem;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,16 +14,13 @@ class Index extends Component
 {
     use WithPagination;
 
-    public function delete($productId)
+    public function delete(Product $product)
     {
-        //delete product from product table
-        //
-        $product = Product::query()->where('id', $productId)->first();
-        $product->delete();
 
-        //delete imagesItem from productImage table
+        $product->removeProduct($product);
 
-        SeoItem::query()->where('ref_id', $productId)->delete();
+
+
     }
 
     public function render()
