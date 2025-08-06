@@ -42,7 +42,7 @@
                                 {{$loop->iteration + $products->firstItem() - 1}}
                             </td>
                             <td>
-                                <img src="/products/{{$product->id}}/small/{{$product->coverImage->path}}"
+                                <img src="/products/{{$product->id}}/small/{{@$product->coverImage->path}}"
                                      class="rounded" alt="">
                             </td>
                             <td>

@@ -29,6 +29,7 @@ class Product extends Model
 
     public function submitToProduct($formData, $productId)
     {
+
         return Product::query()->updateOrCreate(
             [
                 'id' => $productId,
@@ -42,6 +43,7 @@ class Product extends Model
                 'discount_duration' => $formData['discount_duration'],
                 'seller_id' => $formData['sellerId'],
                 'category_id' => $formData['categoryId'],
+                'p_code' => config('app.name') . '-' . $this->generateProductCode(),
             ]);
     }
 
@@ -102,6 +104,15 @@ class Product extends Model
             ->save($path . '/' . pathinfo($photo->hashName(), PATHINFO_FILENAME) . '.webp');
     }
 
+    public function generateProductCode()
+    {
+        do {
+            $randomCode = rand(1000, 100000000);
+            $checkCode = Product::query()->where('p_code', $randomCode)->first();
+        } while ($checkCode);
+
+        return $randomCode;
+    }
 
     public function category()
     {
@@ -109,13 +120,13 @@ class Product extends Model
     }
 
 
-    public function coverImage()
-    {
-        return $this->hasOne(ProductImage::class, 'product_id', 'id')
-            ->where('is_cover', true);
-    }
+     public function coverImage()
+     {
+         return $this->hasOne(ProductImage::class, 'product_id', 'id')
+             ->where('is_cover', true);
+     }
 
-    /* public function coverImage()
+    /*public function coverImage()
     {
         return $this->belongsTo(ProductImage::class, 'id', 'product_id')->where('is_cover', '=', true);
     }*/

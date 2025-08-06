@@ -93,7 +93,7 @@ class Create extends Component
         $validator->validate();
         $this->resetValidation();
         $product->submit($formData, $this->productId, $this->photos, $this->coverIndex);
-        $this->reset();
+        //$this->reset();
         //$this->dispatch('success', 'عملیات با موفقیت انجام شد!');
         $this->redirect(route('admin.product.index'));
         session()->flash('success', 'محصول با موفقیت افزوده شد.');
