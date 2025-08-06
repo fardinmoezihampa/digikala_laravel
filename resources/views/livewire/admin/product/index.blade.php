@@ -16,10 +16,11 @@
     @endif
     <div class="statbox widget box box-shadow">
         <div class="widget-header">
-            <div class="row">
-                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+            <div class="d-flex justify-content-between align-items-center">
                     <h4>لیست محصولات</h4>
-                </div>
+                    <a href="{{route('admin.product.create')}}" class="btn btn-outline-success mb-2 me-4">
+                        افزودن محصول جدید
+                    </a>
             </div>
         </div>
         <div class="widget-content widget-content-area">
@@ -28,6 +29,7 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">کد محصول</th>
                         <th scope="col">تصویر محصول</th>
                         <th scope="col">نام محصول</th>
                         <th scope="col">نام دسته بندی</th>
@@ -40,6 +42,9 @@
                         <tr>
                             <td>
                                 {{$loop->iteration + $products->firstItem() - 1}}
+                            </td>
+                            <td>
+                                {{$product->p_code}}
                             </td>
                             <td>
                                 <img src="/products/{{$product->id}}/small/{{@$product->coverImage->path}}"
