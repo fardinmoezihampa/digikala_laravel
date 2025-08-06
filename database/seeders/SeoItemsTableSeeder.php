@@ -14,12 +14,12 @@ class SeoItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('seo_items')->delete();
-        
+
         \DB::table('seo_items')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'slug' => 'گوشی-موبایل-اپل-مدل-iphone-13-ch-دو-سیم-کارت-ظرفیت-128-گیگابایت-و-رم-4-گیگابایت-نات-اکتیو',
@@ -31,7 +31,7 @@ class SeoItemsTableSeeder extends Seeder
                 'created_at' => '2024-06-20 09:38:36',
                 'updated_at' => '2024-06-20 09:38:36',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'slug' => 'گوشی موبایل سامسونگ مدل Galaxy S24 Ultra دو سیم کارت ظرفیت 256 گیگابایت و رم 12 گیگابایت - ویتنام',
@@ -43,7 +43,7 @@ class SeoItemsTableSeeder extends Seeder
                 'created_at' => '2024-06-20 09:48:15',
                 'updated_at' => '2024-06-20 09:48:15',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'slug' => 'لپ-تاپ-134-اینچی-ایسوس-مدل-rog-flow-z13-gz301ze-i9-12900h-16gb-1ssd-rtx3050ti',
@@ -55,7 +55,7 @@ class SeoItemsTableSeeder extends Seeder
                 'created_at' => '2024-06-20 09:58:03',
                 'updated_at' => '2024-06-20 09:58:03',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'slug' => 'لپ-تاپ-156-اینچی-ایسوس-مدل-tuf-gaming-f15-fx506he-hn393w-i7-11800h-16gb-512ssd-rtx3050ti-w',
@@ -67,7 +67,7 @@ class SeoItemsTableSeeder extends Seeder
                 'created_at' => '2024-06-20 10:00:25',
                 'updated_at' => '2024-06-20 10:00:25',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
                 'slug' => 'هدفون-بلوتوثی-سونی-مدل-wf-1000xm5',
@@ -79,19 +79,8 @@ class SeoItemsTableSeeder extends Seeder
                 'created_at' => '2024-06-20 10:05:16',
                 'updated_at' => '2024-06-20 10:05:16',
             ),
-            5 => 
-            array (
-                'id' => 6,
-                'slug' => '31232',
-                'meta_title' => '',
-                'meta_description' => '',
-                'type' => 'product',
-                'ref_id' => 6,
-                'created_at' => '2024-06-20 10:19:01',
-                'updated_at' => '2024-06-20 10:19:01',
-            ),
         ));
-        
-        
+
+
     }
 }
