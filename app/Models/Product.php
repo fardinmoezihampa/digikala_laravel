@@ -70,7 +70,6 @@ class Product extends Model
         foreach ($photos as $index => $photo) {
 
             $path = pathinfo($photo->hashName(), PATHINFO_FILENAME) . '.webp';
-
             ProductImage::query()->create(
                 [
                     'path' => $path,

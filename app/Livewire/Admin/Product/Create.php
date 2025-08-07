@@ -108,6 +108,7 @@ class Create extends Component
             'photos.*.image' => 'فرمت نامعتبر است ...',
         ]);
 
+
         $validator->validate();
         $this->resetValidation();
         $product->submit($formData, $this->productId, $this->photos, $this->coverIndex);

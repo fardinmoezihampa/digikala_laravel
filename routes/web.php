@@ -13,6 +13,7 @@ use App\Livewire\Admin\Category\FeatureValue;
 
 use App\Livewire\Admin\Product\Index as productIndex;
 use App\Livewire\Admin\Product\Create;
+use App\Livewire\Admin\Product\Features as productFeatures;
 
 //Route::get('/', Index::class);
 
@@ -24,7 +25,8 @@ Route::get('/admin/category', categoryIndex::class)->name('admin.category.index'
 Route::get('/admin/category/{category}/features', Features::class)->name('admin.category.features');
 Route::get('/admin/category/features/{categoryFeature}/values', FeatureValue::class)->name('admin.category.feature.values');
 
-//....setting product ---------------------------------------------------------
+//.....................Route product ---------------------------------------------------------
 
-Route::get('/admin/product/index',productIndex::class)->name('admin.product.index');
-Route::get('/admin/product/create',Create::class)->name('admin.product.create');
+Route::get('/admin/product/index', productIndex::class)->name('admin.product.index');
+Route::get('/admin/product/create', Create::class)->name('admin.product.create');
+Route::get('/admin/product/feature/{product}', productFeatures::class)->name('admin.product.features');

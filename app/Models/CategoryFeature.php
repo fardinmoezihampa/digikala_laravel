@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryFeature extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     public function values()
     {
-        //return $this->hasMany(CategoryFeatureValue::class, 'category_feature_id', 'id');
-        return $this->hasMany(CategoryFeatureValue::class);
+        return $this->hasMany(CategoryFeatureValue::class, 'category_feature_id', 'id');
+        //return $this->hasMany(CategoryFeatureValue::class);
     }
 
-    public function submit($FormData, $categoryId,$featureId)
+    public function submit($FormData, $categoryId, $featureId)
     {
         CategoryFeature::query()->updateOrCreate(
             [
@@ -29,5 +29,10 @@ class CategoryFeature extends Model
                 'category_id' => $categoryId,
             ]
         );
+    }
+
+    public function categoryFeatureValues()
+    {
+        return $this->hasMany(CategoryFeatureValue::class, 'category_feature_id', 'id');
     }
 }

@@ -28,12 +28,12 @@ class FeatureValue extends Component
     public function submit($FormData, CategoryFeatureValue $categoryFeatureValue)
     {
         $validator = Validator::make($FormData, [
-            'value' => 'required|string|max:30',
+            'value' => 'required|string|max:50',
         ],
             [
                 '*.required' => 'فیلد ضروری است.',
                 '*.string' => 'فرمت اشتباه است!',
-                '*.max' => 'حداکثر تعداد کارکتر :30',
+                '*.max' => 'حداکثر تعداد کارکتر :50',
             ]);
 
         $validator->validate();

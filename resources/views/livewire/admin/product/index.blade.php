@@ -34,6 +34,7 @@
                         <th scope="col">نام محصول</th>
                         <th scope="col">نام دسته بندی</th>
                         <th scope="col">قیمت</th>
+                        <th scope="col">ویژگی ها</th>
                         <th class="text-center" scope="col">عملیات</th>
                     </tr>
                     </thead>
@@ -62,6 +63,10 @@
                             </td>
                             <td>
                                 {{number_format(@$product->price)}}
+                            </td>
+                            <td>
+                                <a href="{{route('admin.product.features',$product->id)}}"
+                                   class="btn btn-outline-info">ویژگی</a>
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
