@@ -18,7 +18,6 @@ class Product extends Model
 
     public function submit($formData, $productId, $photos, $coverIndex)
     {
-
         DB::transaction(function () use ($formData, $productId, $photos, $coverIndex) {
 
             $product = $this->submitToProduct($formData, $productId);
@@ -66,9 +65,12 @@ class Product extends Model
 
     public function submitToProductImage($photos, $productId, $coverIndex)
     {
+
+        //ProductImage::query()->where('product_id',$productId)->update(['is_cover' => false]);
         foreach ($photos as $index => $photo) {
 
             $path = pathinfo($photo->hashName(), PATHINFO_FILENAME) . '.webp';
+
             ProductImage::query()->create(
                 [
                     'path' => $path,
@@ -81,6 +83,7 @@ class Product extends Model
 
     public function saveImages($photos, $productId)
     {
+
         foreach ($photos as $photo) {
 
             $this->reasizeImage($photo, $productId, '100', '100', 'small');
@@ -128,12 +131,19 @@ class Product extends Model
             ->where('is_cover', true);
     }
 
-    /*public function coverImage()
+    public function seo()
     {
-        return $this->belongsTo(ProductImage::class, 'id', 'product_id')->where('is_cover', '=', true);
-    }*/
+        return $this->hasOne(SeoItem::class, 'ref_id', 'id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
     public function removeProduct(Product $product)
     {
+
         DB::transaction(function () use ($product) {
             $product->delete();
             ProductImage::query()->where('product_id', $product->id)->delete();
@@ -141,4 +151,17 @@ class Product extends Model
             File::deleteDirectory('products/' . $product->id);
         });
     }
+
+//------------------------method (2) for write relationship------------------------------------------------------------------------------
+    /* public function seo()
+     {
+         return $this->belongsTo(SeoItem::class, 'id', 'product_id');
+     }*/
+
+    /*public function coverImage()
+    {
+        return $this->belongsTo(ProductImage::class, 'id', 'product_id')->where('is_cover', '=', true);
+    }*/
+//------------------------------------------------------------------------------------------------------
+
 }

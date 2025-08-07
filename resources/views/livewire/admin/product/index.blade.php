@@ -41,31 +41,31 @@
                     @foreach($products as $product)
                         <tr>
                             <td>
-                                {{$loop->iteration + $products->firstItem() - 1}}
+                                {{@$loop->iteration + @$products->firstItem() - 1}}
                             </td>
                             <td>
-                                {{$product->p_code}}
+                                {{@$product->p_code}}
                             </td>
                             <td>
-                                <img src="/products/{{$product->id}}/small/{{@$product->coverImage->path}}"
+                                <img src="/products/{{@$product->id}}/small/{{@$product->coverImage->path}}"
                                      class="rounded" alt="">
                             </td>
                             <td>
                                 <div class="media">
                                     <div class="media-body align-self-center">
-                                        <h6 class="mb-0">{{\Illuminate\Support\Str::limit($product->name,50)}}</h6>
+                                        <h6 class="mb-0">{{\Illuminate\Support\Str::limit(@$product->name,50)}}</h6>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                {{$product->category->name}}
+                                {{@$product->category->name}}
                             </td>
                             <td>
-                                {{number_format($product->price)}}
+                                {{number_format(@$product->price)}}
                             </td>
                             <td class="text-center">
                                 <div class="action-btns">
-                                    <a href="javascript:void(0);" wire:click="edit({{$product->id}})"
+                                    <a href="{{route('admin.product.create')}}?p_id={{@$product->id}}"
                                        class="action-btn btn-edit bs-tooltip me-2"
                                        data-toggle="tooltip" data-placement="top" title=""
                                        data-bs-original-title="ویرایش">
@@ -78,7 +78,7 @@
                                         </svg>
                                     </a>
                                     <a href="javascript:void(0);" wire:confirm="آیا از حذف مطمئنید؟"
-                                       wire:click="delete({{$product->id}})"
+                                       wire:click="delete({{@$product->id}})"
                                        class="action-btn btn-delete bs-tooltip"
                                        data-toggle="tooltip" data-placement="top" title=""
                                        data-bs-original-title="حذف">
@@ -100,7 +100,7 @@
 
                     </tbody>
                 </table>
-                {{$products->links('layouts.admin.pagination')}}
+                {{@$products->links('layouts.admin.pagination')}}
             </div>
         </div>
     </div>

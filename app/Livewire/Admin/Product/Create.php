@@ -4,10 +4,12 @@ namespace App\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -23,13 +25,26 @@ class Create extends Component
     public $name;
     public $slug;
 
+
     public $productId;
 
     public $coverIndex = 0;
 
+    //edit
+    public $product;
 
     public function mount()
     {
+        if ($_GET and $_GET['p_id']) {
+            $this->productId = $_GET['p_id'];
+            $product = $this->product = Product::query()
+                ->with('seo', 'images')
+                ->where('id', $this->productId)->firstOrFail();
+            $this->name = $product->name;
+            $this->slug = $product->seo->slug;
+
+
+        }
 
         $this->categories = Category::all();
         $this->sellers = Seller::query()->select('id', 'shop_name')->get();
@@ -50,6 +65,7 @@ class Create extends Component
             $formData['featured'] = false;
         }
 
+
         if ($formData['discount_duration'] == "") {
             $formData['discount_duration'] = null;
         }
@@ -57,6 +73,7 @@ class Create extends Component
         if (!isset($formData['sellerId'])) {
             $formData['sellerId'] = null;
         }
+
 
         $formData['photos'] = $this->photos;
 
@@ -78,8 +95,8 @@ class Create extends Component
             'sellerId' => 'nullable|exists:sellers,id',
             'categoryId' => 'required|exists:categories,id',
 
-
             'coverIndex' => 'required',
+
         ], [
             'coverIndex.required' => 'لطفا یک تصویر شاخص انتخاب کنید.',
             '*.required' => 'فیلد ضروری است.',
@@ -90,6 +107,7 @@ class Create extends Component
             'sellerId.exists' => 'فروشنده نامعتبر است.',
             'photos.*.image' => 'فرمت نامعتبر است ...',
         ]);
+
         $validator->validate();
         $this->resetValidation();
         $product->submit($formData, $this->productId, $this->photos, $this->coverIndex);
@@ -111,6 +129,30 @@ class Create extends Component
         }
         array_splice($this->photos, $index, 1);
 
+    }
+
+    //edit
+
+    public function removeOLdPhoto(ProductImage $productImage, $productId)
+    {
+
+        $productImage->delete();
+        \Illuminate\Support\Facades\File::delete(public_path('products/' . $productId . '/large/' . $productImage->path));
+        \Illuminate\Support\Facades\File::delete(public_path('products/' . $productId . '/medium/' . $productImage->path));
+        \Illuminate\Support\Facades\File::delete(public_path('products/' . $productId . '/small/' . $productImage->path));
+    }
+
+    public function setCoverOldImage($photoId)
+    {
+
+        ProductImage::query()->where('product_id', $this->productId)->update(['is_cover' => false]);
+
+        ProductImage::query()->where([
+            'product_id' => $this->productId,
+            'id' => $photoId,
+        ])->update(['is_cover' => true]);
+
+        $this->dispatch('success', 'تصویر کاور باموفقیت انجان شد.');
     }
 
     public function render()

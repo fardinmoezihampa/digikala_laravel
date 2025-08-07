@@ -2,7 +2,7 @@
     <div class="row mb-4">
         <div class="col-sm-12">
             <label for="name">نام محصول</label>
-            <input type="text" class="form-control" id="name" name="name"
+            <input type="text" class="form-control" id="name" name="name" value="{{@$product->name}}"
                    wire:model.live.debounce.300ms="name">
         </div>
     </div>
@@ -15,7 +15,7 @@
     <div class="row mb-4">
         <div class="col-sm-12">
             <label for="slug">اسلاگ</label>
-            <input type="text" class="form-control" id="slug" name="slug" wire:model="slug" value="">
+            <input type="text" class="form-control" id="slug" name="slug" wire:model="slug" value="{{@$product->seo->slug}}">
         </div>
     </div>
     @error('slug')
@@ -27,7 +27,7 @@
     <div class="row mb-4">
         <div class="col-sm-12">
             <label for="meta_title">عنوان متا</label>
-            <input type="text" class="form-control" id="meta_title" name="meta_title">
+            <input type="text" class="form-control" id="meta_title" name="meta_title" value="{{@$product->seo->meta_title}}">
         </div>
     </div>
     @error('meta_title')
@@ -40,7 +40,7 @@
         <div class="col-sm-12">
             <label for="meta_description">توضیحات متا</label>
             <textarea type="text" class="form-control" id="meta_description" name="meta_description"
-                      rows="3"></textarea>
+                      rows="3">{{@$product->seo->meta_description}}</textarea>
         </div>
     </div>
     @error('meta_description')

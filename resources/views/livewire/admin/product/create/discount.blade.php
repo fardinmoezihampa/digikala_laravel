@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12 mb-4">
                 <label for="discount">درصد تخفیف</label>
-                <input type="text" class="form-control" id="discount" name="discount" value="">
+                <input type="text" class="form-control" id="discount" name="discount" value="{{@$product->discount}}">
             </div>
             <div class="mt-1">
                 @error('discount')
@@ -17,7 +17,7 @@
             <div class="col-sm-12 mb-4">
                 <label for="discount_duration">تاریخ انقضاء</label>
                 <input type="date" class="form-control" id="discount_duration" name="discount_duration"
-                       value="">
+                       value="{{@$product->discount_duration}}">
             </div>
             <div class="mt-1">
                 @error('discount_duration')
@@ -31,6 +31,7 @@
             <div class="col-sm-12 mb-4">
                 <div class="switch form-switch-custom switch-inline form-switch-danger">
                     <input class="switch-input" type="checkbox" name="featured" role="switch"
+                           {{@$product->featured==true ?'checked':''}}
                            id="featured">
                     <label class="switch-label" for="featured">کالای ویژه</label>
                 </div>

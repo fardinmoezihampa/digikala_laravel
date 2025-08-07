@@ -32,10 +32,10 @@ class ProductsTableSeeder extends Seeder
                 'discount_duration' => NULL,
                 'seller_id' => NULL,
                 'category_id' => 2,
-                'p_code' => 'dkp-31271291',
+                'p_code' => 'dkp-710982',
                 'deleted_at' => NULL,
                 'created_at' => '2024-06-20 09:38:36',
-                'updated_at' => '2024-06-20 09:38:36',
+                'updated_at' => '2025-08-07 04:52:10',
             ),
             1 => 
             array (
@@ -96,7 +96,7 @@ class ProductsTableSeeder extends Seeder
                 'id' => 5,
                 'name' => 'هدفون بلوتوثی سونی مدل WF-1000XM5',
                 'price' => 13900000,
-                'discount' => 0,
+                'discount' => 20,
                 'short_description' => NULL,
                 'long_description' => NULL,
                 'stock' => 10,
@@ -104,10 +104,10 @@ class ProductsTableSeeder extends Seeder
                 'discount_duration' => NULL,
                 'seller_id' => NULL,
                 'category_id' => 9,
-                'p_code' => 'dkp-3120091',
+                'p_code' => 'dkp-24046723',
                 'deleted_at' => NULL,
                 'created_at' => '2024-06-20 10:05:16',
-                'updated_at' => '2024-06-20 10:05:16',
+                'updated_at' => '2025-08-07 04:55:36',
             ),
         ));
         
