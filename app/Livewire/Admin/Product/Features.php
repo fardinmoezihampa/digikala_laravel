@@ -13,12 +13,14 @@ class Features extends Component
 
     public $features = [];
     public $productId;
+    public $productName;
 
     public function mount(Product $product)
     {
 
         $categoryID = $product->category_id;
         $this->productId = $product->id;
+        $this->productName = $product->name;
         $this->features = CategoryFeature::query()->where('category_id', $categoryID)->get();
 
     }

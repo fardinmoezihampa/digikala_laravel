@@ -28,9 +28,9 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">کد محصول</th>
-                        <th scope="col">تصویر محصول</th>
+                        <th width="50px" scope="col">#</th>
+                        <th width="150px" scope="col">کد محصول</th>
+                        <th width="130px" scope="col">تصویر محصول</th>
                         <th scope="col">نام محصول</th>
                         <th scope="col">نام دسته بندی</th>
                         <th scope="col">قیمت</th>
@@ -54,7 +54,8 @@
                             <td>
                                 <div class="media">
                                     <div class="media-body align-self-center">
-                                        <h6 class="mb-0">{{\Illuminate\Support\Str::limit(@$product->name,50)}}</h6>
+                                       {{-- <h6 class="mb-0">{{\Illuminate\Support\Str::limit(@$product->name,50)}}</h6>--}}
+                                        <p class="mb-0">{{@$product->name,50}}</p>
                                     </div>
                                 </div>
                             </td>
