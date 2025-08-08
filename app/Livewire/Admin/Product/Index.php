@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Product;
 
 use App\Models\Product;
+use App\Repositories\admin\AdminProductRepositoryInterface;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -10,9 +11,16 @@ class Index extends Component
 {
     use WithPagination;
 
+    private $repository;
+
+    public function boot(AdminProductRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function delete(Product $product)
     {
-        $product->removeProduct($product);
+        $this->repository->removeProduct($product);
     }
 
     public function render()

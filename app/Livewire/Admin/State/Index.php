@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Livewire\Admin\State;
+
 use App\Models\Country;
 use App\Models\State;
+use App\Repositories\admin\AdminStateRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,12 +18,19 @@ class Index extends Component
     public $stateId;
     public $countryId;
 
+    private $repository;
+
+    public function boot(AdminStateRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function mount()
     {
         $this->countries = Country::all();
     }
 
-    public function submit($formData, State $state)
+    public function submit($formData)
     {
         $validator = Validator::make($formData, [
             'name' => 'required|string|max:30',
@@ -34,7 +44,7 @@ class Index extends Component
             ]);
         $validator->validate();
         $this->resetValidation();
-        $state->submit($formData, $this->stateId);
+        $this->repository->submit($formData, $this->stateId);
         $this->reset();
         $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
 
@@ -46,7 +56,7 @@ class Index extends Component
         if ($state) {
             $this->name = $state->name;
             $this->stateId = $state->id;
-            $this->countryId=$state->country_id;
+            $this->countryId = $state->country_id;
         }
     }
 

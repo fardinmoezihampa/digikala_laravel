@@ -11,19 +11,7 @@ class City extends Model
 
     protected $guarded = [];
 
-    public function submit($formData, $cityId)
-    {
-        //dd($cityId);
-        City::query()->updateOrCreate(
-            [
-                'id' => $cityId,
-            ],
-            [
-                'name' => $formData['name'],
-                'state_id' => $formData['stateId'],
-            ]
-        );
-    }
+
 
     public function state()
     {

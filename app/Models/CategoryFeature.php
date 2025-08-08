@@ -18,18 +18,6 @@ class CategoryFeature extends Model
         //return $this->hasMany(CategoryFeatureValue::class);
     }
 
-    public function submit($FormData, $categoryId, $featureId)
-    {
-        CategoryFeature::query()->updateOrCreate(
-            [
-                'id' => $featureId,
-            ],
-            [
-                'name' => $FormData['name'],
-                'category_id' => $categoryId,
-            ]
-        );
-    }
 
     public function categoryFeatureValues()
     {

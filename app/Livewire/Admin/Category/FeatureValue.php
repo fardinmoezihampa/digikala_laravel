@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Category;
 
 use App\Models\CategoryFeature;
 use App\Models\CategoryFeatureValue;
+use App\Repositories\admin\AdminCategoryRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,13 @@ class FeatureValue extends Component
     public $valueId;
     public $value;
 
+    private $repository;
+
+    public function boot(AdminCategoryRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function mount(CategoryFeature $categoryFeature)
     {
         //dd($categoryFeature);
@@ -25,7 +33,7 @@ class FeatureValue extends Component
         $this->featureId = $categoryFeature->id;
     }
 
-    public function submit($FormData, CategoryFeatureValue $categoryFeatureValue)
+    public function submit($FormData)
     {
         $validator = Validator::make($FormData, [
             'value' => 'required|string|max:50',
@@ -38,7 +46,7 @@ class FeatureValue extends Component
 
         $validator->validate();
         $this->resetValidation();
-        $categoryFeatureValue->submit($FormData, $this->valueId, $this->featureId);
+        $this->repository->submitCategoryFeatureValue($FormData, $this->valueId, $this->featureId);
         $this->reset('value');
         $this->reset('valueId');
         $this->dispatch('success', 'عملیات  با موفقیت انجام شد!');
@@ -56,9 +64,10 @@ class FeatureValue extends Component
 
     public function delete($valueId)
     {
-        CategoryFeatureValue::query()->where('id',$valueId)->delete();
+        CategoryFeatureValue::query()->where('id', $valueId)->delete();
         $this->dispatch('success', 'عملیات حذف با موفقیت انجام شد !');
     }
+
     public function render()
     {
         $featureValues = CategoryFeatureValue::query()

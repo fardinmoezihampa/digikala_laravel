@@ -11,18 +11,7 @@ class State extends Model
 
     protected $guarded = [];
 
-    public function submit($formData, $stateId)
-    {
-        State::query()->updateOrCreate(
-            [
-                'id' => $stateId,
-            ],
-            [
-                'name' => $formData['name'],
-                'country_id' => $formData['countryId'],
-            ]
-        );
-    }
+
 
     public function country()
     {

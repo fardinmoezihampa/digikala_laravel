@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Product;
 use App\Models\CategoryFeature;
 use App\Models\Product;
 use App\Models\ProductFeatureValue;
+use App\Repositories\admin\AdminProductRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
@@ -15,17 +16,22 @@ class Features extends Component
     public $productId;
     public $productName;
 
+    private $repository;
+
+    public function boot(AdminProductRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function mount(Product $product)
     {
-
         $categoryID = $product->category_id;
         $this->productId = $product->id;
         $this->productName = $product->name;
         $this->features = CategoryFeature::query()->where('category_id', $categoryID)->get();
-
     }
 
-    public function submit($formData, ProductFeatureValue $productFeatureValue)
+    public function submit($formData)
     {
 
         $featureIds = [];
@@ -57,10 +63,9 @@ class Features extends Component
 
         $validator->validate();
         $this->resetValidation();
-        $productFeatureValue->submit($formData, $this->productId);
+        $this->repository->submitProductFeatures($formData, $this->productId);
         $this->redirect(route('admin.product.index'));
         session()->flash('success', 'عملیات ثبت ویژگی با موفقیت انجام شد.');
-
 
     }
 

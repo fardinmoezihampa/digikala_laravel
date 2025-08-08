@@ -15,6 +15,7 @@ class CkUpload extends Component
     {
         //dd($request->all());
         if ($request->hasFile('upload')) {
+
             $file = $request->file('upload');
             $this->uploadImageInWebpFormat($file, $productId, null, null, 'content');
 

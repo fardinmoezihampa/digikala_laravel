@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Seller;
-use App\Repositories\ProductRepositoryInterface;
+use App\Repositories\admin\AdminProductRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -34,7 +34,7 @@ class Create extends Component
 
     private $repository;
 
-    public function boot(ProductRepositoryInterface $repository)
+    public function boot(AdminProductRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
