@@ -14,6 +14,8 @@ use App\Livewire\Admin\Category\FeatureValue;
 use App\Livewire\Admin\Product\Index as productIndex;
 use App\Livewire\Admin\Product\Create;
 use App\Livewire\Admin\Product\Features as productFeatures;
+use App\Livewire\Admin\Product\Content;
+use App\Livewire\Admin\Product\CkUpload;
 
 //Route::get('/', Index::class);
 
@@ -30,3 +32,8 @@ Route::get('/admin/category/features/{categoryFeature}/values', FeatureValue::cl
 Route::get('/admin/product/index', productIndex::class)->name('admin.product.index');
 Route::get('/admin/product/create', Create::class)->name('admin.product.create');
 Route::get('/admin/product/feature/{product}', productFeatures::class)->name('admin.product.features');
+Route::get('/admin/product/content/{product}', Content::class)->name('admin.product.content');
+
+//.....................Route for upload file ckeditor ---------------------------------------------------------
+
+Route::post('/admin/ck-upload/{productId}', [CkUpload::class,'upload'])->name('admin.ck-upload');

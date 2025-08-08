@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
             <h4> ویژگی دسته بندی
-                <span wire:ignore="" class="text-info">{{\Illuminate\Support\Str::limit(@$productName,30)}}</span></h4>
+                <span wire:ignore="" class="text-info">{{\Illuminate\Support\Str::limit(@$productName,30)}}</span>
+            </h4>
         </div>
     </div>
 
