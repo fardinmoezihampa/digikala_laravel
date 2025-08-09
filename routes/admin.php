@@ -13,6 +13,7 @@ use App\Livewire\Admin\Product\Create;
 use App\Livewire\Admin\Product\Features as productFeatures;
 use App\Livewire\Admin\Product\Content;
 use App\Livewire\Admin\Product\CkUpload;
+use App\Livewire\Admin\Delivery\Index as deliveryIndex;
 
 Route::name('admin.')->group(function () {
 
@@ -27,6 +28,8 @@ Route::name('admin.')->group(function () {
     Route::get('/product/create', Create::class)->name('product.create');
     Route::get('/product/feature/{product}', productFeatures::class)->name('product.features');
     Route::get('/product/content/{product}', Content::class)->name('product.content');
+
+    Route::get('/Delivery/', deliveryIndex::class)->name('delivery.index');
 
     Route::post('/ck-upload/{productId}', [CkUpload::class, 'upload'])->name('ck-upload');
 });

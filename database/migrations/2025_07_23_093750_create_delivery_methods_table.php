@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('delivery_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('priceayment');
+            $table->integer('price');
             $table->timestamps();
         });
     }
