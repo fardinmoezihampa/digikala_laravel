@@ -15,12 +15,16 @@ use App\Repositories\admin\AdminPaymentRepositoryInterface;
 use App\Repositories\admin\AdminProductRepository;
 use App\Repositories\admin\AdminProductRepositoryInterface;
 
+use App\Repositories\admin\AdminSliderRepository;
+use App\Repositories\admin\AdminSliderRepositoryInterface;
 use App\Repositories\admin\AdminStateRepository;
 use App\Repositories\admin\AdminStateRepositoryInterface;
 use App\Repositories\admin\AdminStoryRepository;
 use App\Repositories\admin\AdminStoryRepositoryInterface;
 use App\Repositories\client\ClientAuthRepository;
 use App\Repositories\client\ClientAuthRepositoryInterface;
+use App\Repositories\client\first_page\ClientFirstPageRepository;
+use App\Repositories\client\first_page\ClientFirstPageRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +41,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AdminPaymentRepositoryInterface::class, AdminPaymentRepository::class);
         $this->app->singleton(ClientAuthRepositoryInterface::class, ClientAuthRepository::class);
         $this->app->singleton(AdminStoryRepositoryInterface::class, AdminStoryRepository::class);
+        $this->app->singleton(AdminSliderRepositoryInterface::class, AdminSliderRepository::class);
+        $this->app->singleton(ClientFirstPageRepositoryInterface::class, ClientFirstPageRepository::class);
     }
 
     public function boot(): void

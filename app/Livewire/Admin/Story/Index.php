@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Story;
 
 use App\Models\Story;
+use App\Repositories\admin\AdminStoryRepository;
 use App\Repositories\admin\AdminStoryRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;

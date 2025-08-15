@@ -2,10 +2,19 @@
 
 namespace App\Livewire\Client\Home\Slider;
 
+use App\Models\Slider;
 use Livewire\Component;
 
 class Index extends Component
 {
+
+    public $sliders = [];
+
+    public function mount()
+    {
+        $this->sliders = Slider::query()->where('status', '=', true)->get();
+    }
+
     public function placeholder()
     {
         return view('Layouts.client.placeholders.first-page.slider-skeleton');
@@ -14,6 +23,6 @@ class Index extends Component
     public function render()
     {
         ///sleep(1);
-        return view('livewire.client.home.slider.index');
+        return view('livewire.client.home.slider.index')->layout('layouts.client.app');
     }
 }
