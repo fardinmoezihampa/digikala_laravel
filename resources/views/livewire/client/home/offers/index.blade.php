@@ -39,7 +39,8 @@
             <div class="swiper mySwiper w-100" id="product">
                 <div class="swiper-wrapper">
                     @foreach($featuredProducts as $item)
-                        <a href="/client/pages/product.html" class="swiper-slide text-black">
+                        <a href="{{route('client.product',$item->p_code)}}/{{$item->seo->slug}}"
+                           class="swiper-slide text-black">
                             <div>
                                 <img src="products/{{$item->id}}/medium/{{@$item->coverImage->path}}" alt="slide-img"/>
                                 <p class="fs-8 fw-bold ellipsis p-1">{{$item->name}}</p>

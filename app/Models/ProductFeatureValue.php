@@ -11,5 +11,16 @@ class ProductFeatureValue extends Model
 
     protected $guarded = [];
 
+    public function categoryFeature()
+    {
+        //return $this->belongsTo(CategoryFeature::class, 'category_feature_id', 'id');
+        return $this->belongsTo(CategoryFeature::class);
+    }
+
+    public function categoryFeatureValue()
+    {
+        //return $this->belongsTo(CategoryFeatureValue::class, 'category_feature_value_id', 'id');
+        return $this->belongsTo(CategoryFeatureValue::class);
+    }
 
 }
