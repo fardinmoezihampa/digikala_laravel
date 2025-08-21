@@ -29,6 +29,11 @@ class Product extends Model
         return $this->hasOne(SeoItem::class, 'ref_id', 'id');
     }
 
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class, 'seller_id', 'id');
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');

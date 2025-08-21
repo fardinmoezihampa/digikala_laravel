@@ -58,7 +58,8 @@
         <!-- === Title & Details === -->
         <livewire:client.product.details :name="$product->name"/>
         <!-- === Seller Detail === -->
-        <livewire:client.product.buy-box :price="$product->price" :discount="$product->discount"
+        <livewire:client.product.buy-box :sellerName="$product->seller->name" :price="$product->price"
+                                         :discount="$product->discount"
                                          :finalPrice="$product->finalPrice" :productId="$product->id"/>
     </section>
 
@@ -90,7 +91,8 @@
     <livewire:client.product.sellers/>
 
     <!-- ====== Product more Details ====== -->
-    <livewire:client.product.tabs :productId="$product->id"/>
+    <livewire:client.product.tabs :sellerName="$product->seller->name" :name="$product->name" :coverImage="$product->coverImage" :productId="$product->id"
+                                  :images="$product->images"/>
 
     <!-- ====== Bought next to it ====== -->
     <section class="my-5 border rounded-3 p-3">

@@ -25,6 +25,8 @@ use App\Repositories\client\ClientAuthRepository;
 use App\Repositories\client\ClientAuthRepositoryInterface;
 use App\Repositories\client\first_page\ClientFirstPageRepository;
 use App\Repositories\client\first_page\ClientFirstPageRepositoryInterface;
+use App\Repositories\client\product\ClientProductRepository;
+use App\Repositories\client\product\ClientProductRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AdminStoryRepositoryInterface::class, AdminStoryRepository::class);
         $this->app->singleton(AdminSliderRepositoryInterface::class, AdminSliderRepository::class);
         $this->app->singleton(ClientFirstPageRepositoryInterface::class, ClientFirstPageRepository::class);
+        $this->app->singleton(ClientProductRepositoryInterface::class, ClientProductRepository::class);
     }
 
     public function boot(): void

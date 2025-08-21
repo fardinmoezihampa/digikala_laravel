@@ -8,5 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductReview extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(ProductReviewVote::class, 'product_reviews_id', 'id');
+    }
 }

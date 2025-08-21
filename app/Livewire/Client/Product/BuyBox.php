@@ -3,33 +3,35 @@
 namespace App\Livewire\Client\Product;
 
 use App\Models\Cart;
+use App\Repositories\client\product\ClientProductRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class BuyBox extends Component
 {
     public $price;
+    public $sellerName;
     public $discount;
     public $finalPrice;
     public $productId;
     public $inCart = false;
 
+    private $repository;
+
+    public function boot(ClientProductRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+
     public function mount()
     {
-        $this->inCart = Cart::query()
-            ->where([
-                'product_id' => $this->productId,
-                'user_id' => Auth::id(),
-            ])->exists();
+        $this->inCart =$this->repository->checkProductInCart($this->productId);
     }
 
     public function addToCart()
     {
-        Cart::query()->create([
-            'product_id' => $this->productId,
-            'user_id' => Auth::id(),
-            'quantity' => 1,
-        ]);
+        $this->repository->addToCart($this->productId);
 
         sleep(1);
         $this->inCart = true;
