@@ -2,24 +2,82 @@
 
 namespace App\Livewire\Client\Auth;
 
+use App\Models\User;
+use App\Notifications\SendSmsNotification;
 use App\Repositories\client\ClientAuthRepository;
 use App\Repositories\client\ClientAuthRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;
 
 class Index extends Component
 {
-
     public $deliveryId;
+    public $submitCodeView = false;
+    public $sendSmsError;
+    public $userMobile;
+    public $codeErrorMessage;
+    public $otpCode;
 
     private $repository;
-
 
     public function boot(ClientAuthRepositoryInterface $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function sendSms($formData)
+    {
+        $validator = Validator::make($formData, [
+            'mobile' => ['required', 'regex:/^09\d{9}$/']
+        ], [
+            'required' => 'شماره موبایل الزامیست!',
+            'regex' => 'شماره موبایل نامعتبر است!',
+        ]);
+
+        $validator->validate();
+        $this->resetValidation();
+
+        $activeCode = mt_rand(1000, 9999);
+
+        $notification = new SendSmsNotification($formData['mobile'], 'SendOtpSms', $activeCode);
+
+        try {
+            Notification::sendNow($formData['mobile'], $notification);
+            $this->submitCodeView = true;
+            $this->userMobile = $formData['mobile'];
+            $this->otpCode = $activeCode;
+
+        } catch (\Exception $e) {
+            $this->sendSmsError = "متاسفانه پیامک ارسال نشد. خطا:" . $e->getMessage();
+        }
+    }
+
+    public function submitUser($formData)
+    {
+        $this->codeErrorMessage = false;
+
+        $validator = Validator::make($formData, [
+            'code' => ['required', 'numeric', 'digits:4']
+        ], [
+            'required' => 'شماره موبایل الزامیست!',
+            'digits' => 'کد باید 4 رقمی باشد.',
+        ]);
+
+        $validator->validate();
+        $this->resetValidation();
+
+        $checkUser = $this->repository->submitUserWithMobile($formData, $this->otpCode, $this->userMobile);
+
+        if ($checkUser) {
+            return redirect()->route('client.auth.index');
+        } else {
+            $this->codeErrorMessage = 'کد نامعتبر است!';
+        }
+
     }
 
 
@@ -27,7 +85,6 @@ class Index extends Component
     {
         return Socialite::driver('google')->redirect();
     }
-
 
     public function handleProviderCallback()
     {

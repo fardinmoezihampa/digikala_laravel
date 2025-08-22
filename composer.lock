@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58913b7c3d0d6af8ecdc3905097d7aad",
+    "content-hash": "2156422505e7ebb969ede1bdf281acb7",
     "packages": [
         {
             "name": "brick/math",
@@ -518,6 +518,100 @@
                 "source": "https://github.com/fruitcake/php-cors/tree/v1.3.0"
             },
             "time": "2023-10-12T05:21:21+00:00"
+        },
+        {
+            "name": "ghasedak/laravel",
+            "version": "v2.1.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/ghasedak/laravel/v2.1.3/ghasedak-laravel-v2.1.3.zip",
+                "reference": "527c265c559d53e37e70918f2ac4fd8f2764d2c8",
+                "shasum": ""
+            },
+            "require": {
+                "ghasedak/php": "^2.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Ghasedak": "Ghasedak\\Laravel\\GhasedakFacade"
+                    },
+                    "providers": [
+                        "Ghasedak\\Laravel\\GhasedakServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ghasedak\\Laravel\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rasoul Rahimii",
+                    "email": "RasoulRahimi93@gmail.com"
+                },
+                {
+                    "name": "Omid Mehri",
+                    "email": "thehopeofiran@gmail.com"
+                }
+            ],
+            "description": "Easy-to-use SDK for implementing Ghasedak SMS API in your Laravel projects.",
+            "support": {
+                "issues": "https://github.com/ghasedakapi/ghasedak-laravel/issues",
+                "source": "https://github.com/ghasedakapi/ghasedak-laravel/tree/v2.1.3"
+            },
+            "time": "2022-09-18T12:13:17+00:00"
+        },
+        {
+            "name": "ghasedak/php",
+            "version": "v2.1.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/ghasedak/php/v2.1.3/ghasedak-php-v2.1.3.zip",
+                "reference": "f0aaee5279ca8ac378dd1e5bc29b2dfa8800b6c4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ghasedak\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abbas Hosseinpour",
+                    "email": "abdolzahra512@gmail.com"
+                },
+                {
+                    "name": "Omid Mehri",
+                    "email": "thehopeofiran@gmail.com"
+                }
+            ],
+            "description": "ghasedak sms gateway package for PHP",
+            "homepage": "https://github.com/ghasedakapi/ghasedak-php",
+            "keywords": [
+                "Ghasedak",
+                "api",
+                "notification",
+                "sms",
+                "sms-gateway"
+            ],
+            "support": {
+                "issues": "https://github.com/ghasedakapi/ghasedak-php/issues",
+                "source": "https://github.com/ghasedakapi/ghasedak-php/tree/v2.1.3"
+            },
+            "time": "2022-09-18T12:12:33+00:00"
         },
         {
             "name": "graham-campbell/result-type",

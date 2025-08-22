@@ -50,7 +50,6 @@
 
 
     <!-- ====== Product Detail ====== -->
-
     <section class="my-lg-5 row mx-lg-5">
         <!-- === Picture === -->
         <livewire:client.product.gallery :coverImage="$product->coverImage" :productId="$product->id"

@@ -21,6 +21,8 @@ use App\Repositories\admin\AdminStateRepository;
 use App\Repositories\admin\AdminStateRepositoryInterface;
 use App\Repositories\admin\AdminStoryRepository;
 use App\Repositories\admin\AdminStoryRepositoryInterface;
+use App\Repositories\client\cart\ClientCartRepository;
+use App\Repositories\client\cart\ClientCartRepositoryInterface;
 use App\Repositories\client\ClientAuthRepository;
 use App\Repositories\client\ClientAuthRepositoryInterface;
 use App\Repositories\client\first_page\ClientFirstPageRepository;
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AdminSliderRepositoryInterface::class, AdminSliderRepository::class);
         $this->app->singleton(ClientFirstPageRepositoryInterface::class, ClientFirstPageRepository::class);
         $this->app->singleton(ClientProductRepositoryInterface::class, ClientProductRepository::class);
+        $this->app->singleton(ClientCartRepositoryInterface::class, ClientCartRepository::class);
     }
 
     public function boot(): void
