@@ -10,17 +10,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('mobile')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->text('address');
-            $table->foreignId('country_id')->constrained();
-            $table->foreignId('state_id')->constrained();
-            $table->foreignId('city_id')->constrained();
+            $table->foreignId('order_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedInteger('amount');
+            $table->string('order_number');
+            $table->string('refNumber')->nullable()->unique();
+            $table->string('cardNumber')->nullable();
+            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('payments');
     }
 };

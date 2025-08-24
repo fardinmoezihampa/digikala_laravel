@@ -63,7 +63,7 @@ class Index extends Component
         $validator = Validator::make($formData, [
             'code' => ['required', 'numeric', 'digits:4']
         ], [
-            'required' => 'شماره موبایل الزامیست!',
+            'required' => 'کد الزامی است!',
             'digits' => 'کد باید 4 رقمی باشد.',
         ]);
 

@@ -186,6 +186,10 @@ hr {
     color: var(--primary-color);
 }
 
+.validation-error {
+    color: var(--primary-color);
+}
+
 @media (max-width: 1199px) {
     .shipping-content {
         flex-wrap: wrap;
