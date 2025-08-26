@@ -86,7 +86,7 @@
                 <button
                     class="d-none d-lg-block bg-info w-100 rounded-2 border-0 mt-3 py-3 text-center text-white fs-8">
                     موجود در سبد خرید
-                    <a href="" class="text-secondary">سبد خرید</a>
+                    <a href="{{route('client.shipping')}}" class="text-secondary">سبد خرید</a>
                 </button>
             @endif
 

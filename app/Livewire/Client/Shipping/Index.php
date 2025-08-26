@@ -83,9 +83,6 @@ class Index extends Component
         $this->deliveryPrice = $this->deliveries->first()->price;
         $this->deliveryMethodId = $this->deliveries->first()->id;
 
-        $addressesList = Address::query()->where('user_id', Auth::id())->latest()->get();
-        $this->addressId = $addressesList->first()->id;
-
 
         $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice, $this->discountCodeAmount);
 
@@ -264,8 +261,8 @@ class Index extends Component
 
     public function render()
     {
-        $this->addressList = Address::query()->where('user_id', Auth::id())->latest()->get();
-        //$this->addressId = $addressList->first()->id;
+        $addressList = $this->addressList = Address::query()->where('user_id', Auth::id())->latest()->get();
+        $this->addressId = $addressList->first()->id;
 
         return view('livewire.client.shipping.index')->layout('layouts.client.app-v2');
     }

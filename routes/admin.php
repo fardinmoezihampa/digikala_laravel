@@ -15,6 +15,8 @@ use App\Livewire\Admin\Product\Content;
 use App\Livewire\Admin\Product\CkUpload;
 use App\Livewire\Admin\Delivery\Index as deliveryIndex;
 use App\Livewire\Admin\Payment\Index as paymentIndex;
+use App\Livewire\Admin\Order\Index as orderIndex;
+use App\Livewire\Admin\Order\Details as orderDetails;
 
 use App\Livewire\Admin\Story\Index as storyIndex;
 use App\Livewire\Admin\Slider\Index as sliderIndex;
@@ -31,10 +33,12 @@ Route::name('admin.')->group(function () {
     Route::get('/product/create', Create::class)->name('product.create');
     Route::get('/product/feature/{product}', productFeatures::class)->name('product.features');
     Route::get('/product/content/{product}', Content::class)->name('product.content');
-    Route::get('/delivery/', deliveryIndex::class)->name('delivery.index');
-    Route::get('/payment/', paymentIndex::class)->name('payment.index');
-    Route::get('/story/', storyIndex::class)->name('story.index');
-    Route::get('/slider/', sliderIndex::class)->name('slider.index');
+    Route::get('/delivery', deliveryIndex::class)->name('delivery.index');
+    Route::get('/payment', paymentIndex::class)->name('payment.index');
+    Route::get('/story', storyIndex::class)->name('story.index');
+    Route::get('/slider', sliderIndex::class)->name('slider.index');
+    Route::get('/order', orderIndex::class)->name('order.index');
+    Route::get('/order/{order}', orderDetails::class)->name('order.details');
 
     Route::post('/ck-upload/{productId}', [CkUpload::class, 'upload'])->name('ck-upload');
 });

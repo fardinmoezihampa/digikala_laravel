@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-curl": "*",
         "ghasedak/laravel": "^2.1",
         "hekmatinasser/verta": "^8.5",
         "intervention/image": "^3.11",
@@ -17,8 +18,8 @@
         "laravel/socialite": "^5.23",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
-        "orangehill/iseed": "^3.1",
-      "ext-curl": "*"
+        "morilog/jalali": "3.*",
+        "orangehill/iseed": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",

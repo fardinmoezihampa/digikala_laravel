@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('order_number');
             $table->string('refNumber')->nullable()->unique();
             $table->string('cardNumber')->nullable();
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });
