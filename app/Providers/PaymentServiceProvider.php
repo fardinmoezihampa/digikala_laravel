@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Contracts\PaymentGateWayInterface;
 use App\Models\PaymentMethod;
-use Exception;
 use Illuminate\Support\ServiceProvider;
 
 class PaymentServiceProvider extends ServiceProvider
@@ -14,6 +13,8 @@ class PaymentServiceProvider extends ServiceProvider
         $this->app->singleton(PaymentGateWayInterface::class, function () {
             $activePayment = PaymentMethod::query()->where('is_active', true)->first();
             $gateWayClass = 'App\\Services\\PaymentGateWay\\' . $activePayment->name;
+            //dd($activePayment);
+
 
             if (!$activePayment || !class_exists($gateWayClass)) {
                 throw new \Exception('Active payment gateway not found or invalid claas!');

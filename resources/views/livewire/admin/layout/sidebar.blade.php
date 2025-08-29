@@ -216,13 +216,13 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="transactions" data-bs-parent="#accordionExample">
                     <li>
-                        <a class="badge badge-light-info" href="#"> لیست تراکنش ها </a>
+                        <a class="badge badge-light-info" href="{{route('admin.transaction.index')}}?status=all"> لیست تراکنش ها </a>
                     </li>
                     <li>
-                        <a class="badge badge-light-success" href="#"> موفق </a>
+                        <a class="badge badge-light-success" href="{{route('admin.transaction.index')}}?status=completed"> موفق </a>
                     </li>
                     <li>
-                        <a class="badge badge-light-danger" href="{#"> ناموفق </a>
+                        <a class="badge badge-light-danger" href="{{route('admin.transaction.index')}}?status=canceled"> ناموفق </a>
                     </li>
 
                 </ul>

@@ -41,6 +41,9 @@ return [
     ],
     'zibal' => [
         'merchent' => env('ZIBAL_MERCHENT'),
-    ]
+    ],
+    'zarinpal' => [
+        'merchant' => env('ZARINPAL_MERCHANT'),
+    ],
 
 ];

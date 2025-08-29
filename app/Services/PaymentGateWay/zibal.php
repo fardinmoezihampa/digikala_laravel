@@ -7,7 +7,7 @@ use App\Models\Payment;
 use App\Models\PaymentMethod;
 use Exception;
 
-class Zibal implements PaymentGateWayInterface
+class zibal implements PaymentGateWayInterface
 {
 
     public function request($amount, $orderNumber)
