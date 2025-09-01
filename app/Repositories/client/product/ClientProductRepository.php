@@ -18,7 +18,7 @@ class ClientProductRepository implements ClientProductRepositoryInterface
         return Product::query()
             ->where('p_code', '=', $p_code)
             ->select('id', 'name', 'price', 'discount', 'discount_duration', 'stock', 'featured', 'seller_id', 'category_id', 'p_code')
-            ->with('images', 'coverImage', 'seller')
+            ->with('images', 'coverImage', 'seller','seo')
             ->firstOrFail();
     }
 

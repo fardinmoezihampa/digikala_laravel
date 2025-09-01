@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Artesaos\SEOTools\Facades\SEOTools as SEO;
 
 Route::prefix('admin')->group(function () {
     require __DIR__ . '/admin.php';
@@ -27,3 +28,14 @@ Route::get('/test-baseon', function() {
     $obj = new BaseOn('ping');
     dd($obj);
 });*/
+
+
+
+/*Route::get('/seo-test', function () {
+    SEO::setTitle('Test Title');
+    SEO::setDescription('Test Description');
+    return view('welcom');
+});*/
+
+
+

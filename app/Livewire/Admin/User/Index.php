@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Livewire\Admin\User;
+
+use App\Models\User;
+use Livewire\Component;
+
+class Index extends Component
+{
+    public $search = '';
+
+    public function render()
+    {
+        $users = User::query()
+            ->withCount('orders')
+            ->latest();
+
+        if ($this->search) {
+            $users->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('mobile', 'like', '%' . $this->search . '%')
+                ->orWhere('email', 'like', '%' . $this->search . '%');
+        }
+
+        return view('livewire.admin.user.index', [
+            'users' => $users->paginate(5),
+        ])->layout('layouts.admin.app');
+    }
+}

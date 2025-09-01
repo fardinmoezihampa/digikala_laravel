@@ -4,7 +4,7 @@
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="index.html">
-                    <img  src="/admin/digikala-logo-admin.png" alt="logo">
+                    <img src="/admin/digikala-logo-admin.png" alt="logo">
                 </a>
             </li>
         </ul>
@@ -249,8 +249,12 @@
                                 &#x1F44B;
                             </div>
                             <div class="media-body">
-                                <h5>Shaun Park</h5>
-                                <p>Project Leader</p>
+                                <h5>{{\Illuminate\Support\Facades\Auth::guard('admin')->user()->name}}</h5>
+                                <p>
+                                    @foreach(\Illuminate\Support\Facades\Auth::guard('admin')->user()->getRoleNames() as $role)
+                                        {{$role}}
+                                    @endforeach
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -289,7 +293,7 @@
                         </a>
                     </div>
                     <div class="dropdown-item">
-                        <a href="auth-boxed-signin.html">
+                        <a href="{{route('admin.logout')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-log-out">

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     @include('layouts.admin.links')
+    {{-- متاهای SEO --}}
+    {!! \Artesaos\SEOTools\Facades\SEOTools::generate() !!}
+    {{-- {!! SEO::generate() !!}--}}
+
+
 </head>
 <body class=" layout-boxed">
 <!-- BEGIN LOADER -->

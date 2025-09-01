@@ -28,7 +28,7 @@ class AdminOrderRepository implements AdminOrderRepositoryInterface
         return $orderDetails;
     }
 
-    public function getOrderWithFilters($search = null, $status = null)
+    public function getOrderWithFilters($search = null, $status = null, $user = null)
     {
 
         $query = Order::query()
@@ -45,6 +45,9 @@ class AdminOrderRepository implements AdminOrderRepositoryInterface
 
         if ($status && $status != 'all') {
             $query->where('status', '=', $status);
+        }
+        if ($user && $user != 'all') {
+            $query->where('user_id', '=', $user);
         }
         return $query->latest();
     }

@@ -25,5 +25,4 @@ Route::name('client.')->group(function () {
         Route::get('/payment/callback', Callback::class)->name('payment.callback');
     });
 
-
 });

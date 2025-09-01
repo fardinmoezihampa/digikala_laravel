@@ -185,10 +185,10 @@
                 </a>
                 <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
                     <li>
-                        <a class="badge badge-light-info" href="#"> مشتریان </a>
+                        <a class="badge badge-light-info" href="{{route('admin.user.index')}}"> مشتریان </a>
                     </li>
                     <li>
-                        <a class="badge badge-light-secondary" href="#"> ادمین ها </a>
+                        <a class="badge badge-light-secondary" href="{{route('admin.admin-user.index')}}"> ادمین ها </a>
                     </li>
                     <li>
                         <a class="badge badge-light-success" href="#"> فروشندگان </a>

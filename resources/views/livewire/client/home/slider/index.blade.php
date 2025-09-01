@@ -40,7 +40,6 @@
                     <div class="carousel-item {{$loop->index==0 ? 'active':''}}" data-bs-interval="3500">
                         <img src="sliders/{{$item->image}}" class="d-block w-100" alt="{{$item->title}}" title="{{$item->title}}"/>
                     </div>
-
                 @endforeach
             </div>
             <button

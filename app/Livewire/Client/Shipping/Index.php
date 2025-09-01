@@ -4,26 +4,21 @@ namespace App\Livewire\Client\Shipping;
 
 use App\Contracts\PaymentGateWayInterface;
 use App\Models\Address;
-use App\Models\Cart;
 use App\Models\City;
 use App\Models\Coupons;
 use App\Models\deliveryMethod;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Payment;
-use App\Models\Product;
 use App\Models\State;
 use App\Repositories\client\Shipping\ClientShippingRepositoryInterface;
+use Artesaos\SEOTools\Traits\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use  SEOTools;
 
     public $deliveries = [];
     public $deliveryMethodId;
@@ -67,7 +62,7 @@ class Index extends Component
     public function mount()
     {
         //dd(Session::get('invoiceFromCart'));
-
+        $this->seoConfig();
         if (Session::get('invoiceFromCart')) {
             $invoice = Session::get('invoiceFromCart');
 
@@ -86,6 +81,14 @@ class Index extends Component
 
         $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice, $this->discountCodeAmount);
 
+    }
+
+
+    public function seoConfig()
+    {
+        $this->seo()
+            ->setTitle('جزئیات سفارش خرید شما')
+            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! - برای خرید کلیک کنید!');
     }
 
     public function totalAmountForPayment($totalDiscountedPrice, $deliveryPrice, $discountCodeAmount)

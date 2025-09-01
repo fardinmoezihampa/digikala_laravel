@@ -26,7 +26,7 @@ class Product extends Model
 
     public function seo()
     {
-        return $this->hasOne(SeoItem::class, 'ref_id', 'id');
+        return $this->hasOne(SeoItem::class, 'ref_id', 'id')->where('type', '=', 'product');
     }
 
     public function seller()
