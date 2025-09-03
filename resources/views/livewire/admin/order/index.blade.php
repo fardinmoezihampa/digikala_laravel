@@ -62,7 +62,7 @@
                                 {{number_format(@$order->amount)}}
                             </td>
                             <td>
-                                @role('order admin')
+                               {{-- @role('order admin')--}}
                                 <select class="form-control  bg-{{$order->statusColor}} text-center" name="operation"
                                         wire:change="changeStatus({{$order->id}},$event.target.value)">
                                     <option value="pending" {{$order->status == 'pending' ? 'selected':''}}>pending
@@ -76,7 +76,7 @@
                                     <option value="canceled" {{$order->status == 'canceled' ? 'selected':''}}>canceled
                                     </option>
                                 </select>
-                                @endrole
+                               {{-- @endrole--}}
                                 @error('$orderId,$event)')
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror

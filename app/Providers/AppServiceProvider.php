@@ -35,6 +35,8 @@ use App\Repositories\client\product\ClientProductRepository;
 use App\Repositories\client\product\ClientProductRepositoryInterface;
 use App\Repositories\client\Shipping\ClientShippingRepository;
 use App\Repositories\client\Shipping\ClientShippingRepositoryInterface;
+use App\Repositories\seller\SellerOrderRepository;
+use App\Repositories\seller\SellerOrderRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
@@ -60,6 +62,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ClientProductRepositoryInterface::class, ClientProductRepository::class);
         $this->app->singleton(ClientCartRepositoryInterface::class, ClientCartRepository::class);
         $this->app->singleton(ClientShippingRepositoryInterface::class, ClientShippingRepository::class);
+
+        $this->app->singleton(SellerOrderRepositoryInterface::class, SellerOrderRepository::class);
     }
 
     public function boot(): void

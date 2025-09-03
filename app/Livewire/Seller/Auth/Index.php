@@ -12,15 +12,14 @@ class Index extends Component
 
     public function submit($formData)
     {
+
         $validator = Validator::make($formData, [
             'email' => 'required|exists:sellers,email',
             'password' => 'required',
-        ],
-            [
-                '*.required' => 'فیلد ضروری است.',
-                'email.exists' => 'ایمیل نامعتبر است!',
-            ]);
-
+        ], [
+            '*.required' => 'فیلد اجباری',
+            'email.exists' => 'ایمیل نامعتبر است!',
+        ]);
         $validator->validate();
         $this->resetValidation();
 

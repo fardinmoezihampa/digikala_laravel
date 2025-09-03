@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Livewire\Seller\Product;
+
+use App\Models\Category;
+use App\Models\CategoryFeature;
+use App\Models\Product;
+use App\Repositories\admin\AdminProductRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
+use Livewire\Component;
+
+class Features extends Component
+{
+
+    public $features = [];
+    public $productId;
+    public $productName;
+
+    private $repository;
+
+    public function boot(AdminProductRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function mount(Product $product)
+    {
+        $this->productId = $product->id;
+        $this->productName = $product->name;
+
+        $categoryId = $product->category_id;
+        $category = Category::query()->find($categoryId);
+
+        $this->features = CategoryFeature::query()->where('category_id', @$category->parent->id)->get();
+    }
+
+    public function submit($formData)
+    {
+
+        $featureIds = [];
+        $featureValueIds = [];
+
+        foreach ($formData as $value) {
+            list($featureId, $featureValueId) = explode('_', $value);
+            $featureIds[] = $featureId;
+            $featureValueIds[] = $featureValueId;
+        }
+        $data = [
+            'feature_ids' => $featureIds,
+            'feature_value_ids' => $featureValueIds,
+        ];
+
+        $validator = Validator::make($data, [
+            'feature_ids' => 'required|array',
+            'feature_ids.*' => 'required|exists:category_features,id',
+            'feature_value_ids' => 'required|array',
+            'feature_value_ids.*' => 'required|exists:category_feature_values,id',
+        ], [
+            '*.required' => 'فیلد اجباری',
+            '*.array' => 'نوع اطلاعات باید آرایه باشد.',
+            'feature_ids.*.exists' => 'ویژگی نامعتبر است!',
+            'feature_value_ids' => 'مقادیر ویژگی نامعتبر است !',
+        ]);
+
+        //dd($formData, $featureIds, $featureValueIds, $data);
+
+        $validator->validate();
+        $this->resetValidation();
+        $this->repository->submitProductFeatures($formData, $this->productId);
+        $this->redirect(route('seller.product.index'));
+        session()->flash('success', 'عملیات ثبت ویژگی با موفقیت انجام شد.');
+
+    }
+
+    public function render()
+    {
+        return view('livewire.seller.product.features')->layout('layouts.seller.app');
+    }
+}

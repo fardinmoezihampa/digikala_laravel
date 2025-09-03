@@ -48,6 +48,24 @@
                 </div>
                 @enderror
             </div>
+            <div class="col-xxl-12 col-md-6 mb-4">
+                <label for="sellerId">فروشنده</label>
+                <select class="form-select" id="sellerId" name="sellerId">
+                    @foreach($sellers as $seller)
+                        <option
+                            value="{{@$seller->id}}" {{@$seller->id==@$product->seller_id?'selected':''}}>{{@$seller->shop_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mt-1">
+                @error('sellerId')
+                <div class="alert alert-light-danger alert-dismissible fade show border-0 mb-4"
+                     role="alert"
+                     wire:loading.remove>
+                    <strong> خطا ! </strong>{{$message}}</button>
+                </div>
+                @enderror
+            </div>
         </div>
     </div>
 </div>

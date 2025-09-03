@@ -18,8 +18,8 @@ use App\Livewire\Admin\Product\Content;
 use App\Livewire\Admin\Product\CkUpload;
 use App\Livewire\Admin\Delivery\Index as deliveryIndex;
 use App\Livewire\Admin\Payment\Index as paymentIndex;
-use App\Livewire\Admin\Order\Index as orderIndex;
 use App\Livewire\Admin\AdminUser\Index as adminUserIndex;
+use App\Livewire\Admin\Order\Index as orderIndex;
 use App\Livewire\Admin\Order\Details as orderDetails;
 
 use App\Livewire\Admin\Story\Index as storyIndex;
@@ -31,7 +31,7 @@ Route::name('admin.')->group(function () {
     Route::get('/logout', [authIndex::class, 'logout'])->name('logout')->middleware('auth:admin');
 
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', dashboardIndex::class)->name('dashboard.index')->middleware(['role:super admin']);
+        Route::get('/dashboard', dashboardIndex::class)->name('dashboard.index')/*->middleware(['role:super admin'])*/;
         Route::get('/country', countryIndex::class)->name('country.index');
         Route::get('/state', stateIndex::class)->name('state.index');
         Route::get('/city', cityIndex::class)->name('city.index');
@@ -46,8 +46,8 @@ Route::name('admin.')->group(function () {
         Route::get('/payment', paymentIndex::class)->name('payment.index');
         Route::get('/story', storyIndex::class)->name('story.index');
         Route::get('/slider', sliderIndex::class)->name('slider.index');
-        Route::get('/order', orderIndex::class)->name('order.index')->middleware(['role:order admin|product admin|super admin']);
-        Route::get('/order/{order}', orderDetails::class)->name('order.details')->middleware(['role:order admin|product admin|super admin']);
+        Route::get('/order', orderIndex::class)->name('order.index')/*->middleware(['role:order admin|product admin|super admin'])*/;
+        Route::get('/order/{order}', orderDetails::class)->name('order.details')/*->middleware(['role:order admin|product admin|super admin'])*/;
         Route::get('/transaction', transactionIndex::class)->name('transaction.index');
         Route::get('/user', userIndex::class)->name('user.index');
         Route::get('/admin-user', adminUserIndex::class)->name('admin-user.index');
